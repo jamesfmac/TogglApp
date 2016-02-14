@@ -1,6 +1,6 @@
-# h1 Toggl App Read Me
+# Toggl App Read Me
 
-### h3 Project Goals 
+### Project Goals 
 
 1. Integrate with Toggl API
 2. UI for selecting date range
