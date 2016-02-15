@@ -13,7 +13,6 @@ var outputRecords = [];
 //testing out moments 
 
 
-
 var convertToGmtISO = function (dateTime) {
     var inputDateTime = dateTime;
     var outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').startOf('day').tz('Etc/Greenwich').format();
