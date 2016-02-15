@@ -7,3 +7,6 @@
 3. Trigger .csv download for the client side
 4. Intigrate google log in 
 5. API key configurable per user
+
+### Working Notest
+- Investigating options for implmenting the UI, express will probably be the way forward
