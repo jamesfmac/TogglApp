@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require('body-parser')
 var app = express();
 var router = express.Router();
+var port = process.env.PORT || 3000;
 var path = __dirname + '/views/';
 var jsonParser = bodyParser.json();
 var urlParser = bodyParser.urlencoded({
@@ -48,6 +49,6 @@ router.post("/api/timelogs", function (req, res) {
 
 app.use("/", router);
 
-app.listen(3000, function () {
+app.listen(port, function () {
     console.log("Live at Port 3000");
 });
