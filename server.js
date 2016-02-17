@@ -4,6 +4,12 @@ var app = express();
 var router = express.Router();
 var path = __dirname + '/views/';
 var jsonParser = bodyParser.json();
+var urlParser = bodyParser.urlencoded({
+    extended: true
+})
+var buildReport = require('./buildtimereport.js');
+
+app.use(urlParser);
 
 app.use(express.static('public'));
 
@@ -22,11 +28,19 @@ router.get("/", function (req, res) {
 
 
 router.post("/api/timelogs", function (req, res) {
-    var sdate = req.body.startdate
+    var sdate = req.body.startdate;
+    var edate = req.body.enddate;
+    console.log(sdate + " " + edate)
     res.setHeader('Content-disposition', 'attachment');
     res.setHeader('Content-type', 'text/csv');
-    res.download('./output/testfile.csv', 'testfile.csv');
-    console.log('post hit' + sdate);
+
+    var callback = function (filePath, filename) {
+        res.download(filePath + filename, filename);
+        console.log('callback worked??')
+    };
+    buildReport.buildFile(sdate, edate, callback);
+
+    console.log('post hit' + sdate + buildReport.x);
 });
 
 
