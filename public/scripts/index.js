@@ -1,27 +1,31 @@
 var test = function () {
-    var inputstartdate =
-        $('#startdate').val();
-    var inputenddate =
-        $('#endate').val();
-    var data = {
+    var formData = {
         "user": "me!"
 
     };
-    /*
-                  $.ajax({
-                      type: "POST",
-                      url: "/api/timelogs",
-                      processData: false,
-                      contentType: 'application/json',
-                      data: JSON.stringify(data)
-                  });
-                  console.log(data);
-                  */
+
+    if ($('#startdate').val()) {
+        formData.startdate = $('#startdate').val()
+    }
+    if ($('#enddate').val()) {
+        formData.endate = $('#enddate').val()
+    }
+
+    $.ajax({
+        type: "post",
+        url: "/api/timelogs",
+        processData: false,
+        contentType: 'application/json',
+        data: JSON.stringify(formData)
+    });
+    console.log(formData);
+
 };
 
 
 
 
 
-
-document.getElementById("btnrequestextract").addEventListener("click", test)
+/*
+document.getElementById("btnrequestextract").addEventListener("click", test); 
+*/
