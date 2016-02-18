@@ -117,13 +117,8 @@ var createCSVFile = function (filepath, filename, callback) {
         if (err) {
             return console.log(err);
         }
-        fs.writeFile(filepath + filename, output, function (err) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("The file was saved!");
-            callback(filepath, filename);
-        });
+        console.log("The file was saved!");
+        callback(output, filename);
     });
 
 };

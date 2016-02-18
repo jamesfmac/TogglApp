@@ -32,12 +32,14 @@ router.post("/api/timelogs", function (req, res) {
     var sdate = req.body.startdate;
     var edate = req.body.enddate;
     console.log(sdate + " " + edate)
-    res.setHeader('Content-disposition', 'attachment');
-    res.setHeader('Content-type', 'text/csv');
 
-    var callback = function (filePath, filename) {
-        res.download(filePath + filename, filename);
-        console.log('callback worked??')
+
+    var callback = function (output, filename) {
+
+        res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+        res.setHeader('Content-type', 'text/csv');
+        res.end(output, 'utf-8');
+        console.log('callback worked??');
     };
     buildReport.buildFile(sdate, edate, callback);
 
