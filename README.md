@@ -8,5 +8,5 @@
 4. Intigrate google log in 
 5. API key configurable per user
 
-### Working Notest
+### Working Notes
 - Investigating options for implmenting the UI, express will probably be the way forward
