@@ -13,8 +13,7 @@ var outputRecords = [];
 //testing out moments 
 
 
-
-var convertToGmtISO = function(dateTime){
+var convertToGmtISO = function (dateTime) {
     var inputDateTime = dateTime;
     var outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').startOf('day').tz('Etc/Greenwich').format();
     return outputDateTime;
@@ -23,15 +22,13 @@ var convertToGmtISO = function(dateTime){
 //capture missing dates and replace with sdate = 1/1/16 and edate = today
 if (eDate) {
     eDateIso = convertToGmtISO(eDate);
-}
-else {
+} else {
     eDateIso = new Date().toISOString();
 }
 
 if (sDate) {
     sDateIso = convertToGmtISO(sDate);
-}
-else {
+} else {
     sDateIso = new Date('2016/01/01').toISOString();
 }
 
@@ -50,13 +47,12 @@ request({
         'user': 'd7bc0e45194751ccd412cf5a5e02576d',
         'pass': 'api_token'
     }
-}, function(error, response, body) {
+}, function (error, response, body) {
     if (error) {
         console.log(error);
-    }
-    else {
+    } else {
         parsedResponse = JSON.parse(body);
-        
+
 
         createCSVFile();
 
@@ -75,42 +71,47 @@ function convertToSydTimezone(inputDate) {
 
     if (new Date(inputDate) >= daylightSavingsEndDate && new Date(inputDate) <= daylightSavingsStartDate) {
         timeZoneOffset = 10
-    }
-    else {
+    } else {
         timeZoneOffset = 11
     }
-  
+
     var sydDate = new Date(inputDate).setHours(new Date(inputDate).getHours() + timeZoneOffset)
     return sydDate
 }
 
-var createCSVFile = function() {
+var createCSVFile = function () {
     var i = 0;
     for (i; i < parsedResponse.length; i++) {
 
         var logEntry = parsedResponse[i];
         var startTimeSyd = convertToSydTimezone(logEntry.start);
         var endTimeTimeSyd = convertToSydTimezone(logEntry.start);
-        var duration = (logEntry.duration/60).toFixed(0);
+        var duration = (logEntry.duration / 60).toFixed(0);
         var startTime = new Date(startTimeSyd).getHours() + "." + ('0' + new Date(logEntry.start).getMinutes()).slice(-2);
         var endTime = new Date(endTimeTimeSyd).getHours() + "." + ('0' + new Date(logEntry.stop).getMinutes()).slice(-2);
         var date = new Date(startTimeSyd).getDate()
 
         var outPutRow = startTime + " - " + endTime + " " + logEntry.description;
-       outputRecords.push({ Datee: date,Duration: duration, Comment: outPutRow});
-            }
-csv.stringify(outputRecords,{ header: true}, function(err, output) {
-    if(err){
-        return console.log(err);
+        outputRecords.push({
+            Datee: date,
+            Duration: duration,
+            Comment: outPutRow
+        });
     }
-    fs.writeFile("./output/test.csv", output, function(err) {
+    csv.stringify(outputRecords, {
+        header: true
+    }, function (err, output) {
         if (err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
-       
+        fs.writeFile("./output/test" + sDateIso + ".csv", output, function (err) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("The file was saved!");
+
+        });
     });
-});
 
 };
 

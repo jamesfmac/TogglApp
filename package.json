@@ -2,14 +2,21 @@
   "name": "toggl_api",
   "version": "1.0.0",
   "description": "Api for pulling timelogs from toggl",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JMc",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "csv": "^0.4.6",
-    "moment-timezone": "^0.5.0"
+    "express": "^4.13.4",
+    "moment-timezone": "^0.5.0",
+    "request": "^2.69.0"
+  },
+  "devDependencies": {
+    "util": "^0.10.3"
   }
 }
