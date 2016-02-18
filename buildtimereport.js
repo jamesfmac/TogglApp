@@ -76,19 +76,19 @@ var buildFile = function (sDate, eDate, callback) {
 
 //function checks what timezone offset to apply (sydney only) and then converts whatever datestamp has been sent
 function convertToSydTimezone(inputDate) {
-    var timeLogYear = new Date(inputDate).getFullYear();
-    var timeZoneOffset = '';
-    var daylightSavingsEndDate = new Date('03/01/' + timeLogYear)
-    var daylightSavingsStartDate = new Date('10/02/' + timeLogYear)
+    console.log(inputDate);
 
-    if (new Date(inputDate) >= daylightSavingsEndDate && new Date(inputDate) <= daylightSavingsStartDate) {
-        timeZoneOffset = 10
+    var sydDate = '';
+
+    if (moment.parseZone(inputDate)._offset == 0) {
+
+        sydDate = moment.tz(inputDate, 'Etc/Greenwich').tz('Australia/Sydney')
     } else {
-        timeZoneOffset = 11
+        sydDate = moment.tz(inputDate)
     }
-
-    var sydDate = new Date(inputDate).setHours(new Date(inputDate).getHours() + timeZoneOffset)
-    return sydDate
+    console.log(inputDate);
+    console.log(sydDate);
+    return sydDate;
 }
 
 var createCSVFile = function (filepath, filename, callback) {
@@ -98,11 +98,11 @@ var createCSVFile = function (filepath, filename, callback) {
 
         var logEntry = parsedResponse[i];
         var startTimeSyd = convertToSydTimezone(logEntry.start);
-        var endTimeTimeSyd = convertToSydTimezone(logEntry.start);
+        var endTimeSyd = convertToSydTimezone(logEntry.stop);
         var duration = (logEntry.duration / 60).toFixed(0);
-        var startTime = new Date(startTimeSyd).getHours() + "." + ('0' + new Date(logEntry.start).getMinutes()).slice(-2);
-        var endTime = new Date(endTimeTimeSyd).getHours() + "." + ('0' + new Date(logEntry.stop).getMinutes()).slice(-2);
-        var date = new Date(startTimeSyd).getDate()
+        var startTime = startTimeSyd.format('h.mma')
+        var endTime = endTimeSyd.format('h.mma')
+        var date = startTimeSyd.format('ddd D MMM')
 
         var outPutRow = startTime + " - " + endTime + " " + logEntry.description;
         outputRecords.push({
