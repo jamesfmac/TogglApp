@@ -1,7 +1,3 @@
-var x = 'ok'
-
-module.exports.x = x
-
 var request = require("request");
 var util = require("util");
 var csv = require("csv");
@@ -16,24 +12,33 @@ var outputRecords = [];
 //testing out moments 
 
 
-var convertToGmtISO = function (dateTime) {
+var convertToGmtISO = function (dateTime, dayRounding) {
     var inputDateTime = dateTime;
-    var outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').startOf('day').tz('Etc/Greenwich').format();
+    var outputDateTime = '';
+
+    if (dayRounding == 'up') {
+        outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').endOf('day').tz('Etc/Greenwich').format();
+    } else if (dayRounding == 'down') {
+
+        outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').startOf('day').tz('Etc/Greenwich').format();
+    } else {
+        outputDateTime = moment.tz(inputDateTime, 'Australia/Sydney').tz('Etc/Greenwich').format();
+    }
     return outputDateTime;
-}
+};
 
 //capture missing dates and replace with sdate = 1/1/16 and edate = today
 var buildFile = function (sDate, eDate, callback) {
     var filePath = './output/';
     var filename = 'timelog' + sDate + '.csv';
     if (eDate) {
-        eDateIso = convertToGmtISO(eDate);
+        eDateIso = convertToGmtISO(eDate, 'up');
     } else {
         eDateIso = new Date().toISOString();
     }
 
     if (sDate) {
-        sDateIso = convertToGmtISO(sDate);
+        sDateIso = convertToGmtISO(sDate, 'down');
     } else {
         sDateIso = new Date('2016/01/01').toISOString();
     }
