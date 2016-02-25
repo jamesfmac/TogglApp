@@ -30,7 +30,7 @@ router.get("/login", function (req, res) {
     res.sendFile(path + "login.html");
 });
 
-router.post("/login", function (req, res) {
+router.post("/api/createuser", function (req, res) {
     var email = req.body.email;
     var passwarod = req.body.password
     var callback = function (err) {

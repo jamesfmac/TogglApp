@@ -20,39 +20,76 @@
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
 
                     <div class="account-wall">
-                        <h1 class="text-center login-title">Please Sign In</h1>
-                        <form action="/login" method='post' class="form-signin">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input id="email" name="email" class='form-control' type='email' </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="Login" class="active"><a href="#login" data-toggle='tab'>Log In</a></li>
+                            <li role="New User"><a href="#signup" data-toggle='tab'>Sign Up</a></li>
+
+                        </ul>
+                        <!-- log in form  -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="login">
+                                <h1 class="text-center login-title">Please Sign In</h1>
+                                <form action="/login" method='post' class="form-signin">
+                                    <div class="form-group">
+                                        <label for="email"></label>
+                                        <input id="email" name="email" class='form-control' type='email' placeholder='Email' </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"></label>
+                                        <input id="password" name="password" class="form-control" type="password" placeholder='Password' required>
+                                    </div>
+
+                                    <button type="submit" id="btnlogin" class="btn btn-primary">Log In</button>
+
+
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input id="password" name="password" class="form-control" type="password" required>
+                            <!-- sign up form  -->
+                            <div class="tab-pane" id="signup">
+                                <h1 class="text-center login-title">Create Account</h1>
+                                <form action="/api/createuser" method='post' class="form-signin">
+                                    <div class="form-group">
+                                        <label for="firstname"></label>
+                                        <input id="firstname" name="firstname" class='form-control' type='text' placeholder='First Name' </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname"></label>
+                                        <input id="lastname" name="lastname" class='form-control' type='text' placeholder='Last Name' </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email"></label>
+                                        <input id="email" name="email" class='form-control' type='email' placeholder='Email' </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"></label>
+                                        <input id="password" name="password" class="form-control" type="password" placeholder='Password' required>
+                                    </div>
+
+                                    <button type="submit" id="btncreateuser" class="btn btn-primary">Create</button>
+
+
+                                </form>
                             </div>
 
-                            <button type="submit" id="btnlogin" class="btn btn-primary">Log In</button>
-                            <button type="button" id='newuser' class="btn btn-secondary">Create</button>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="Login" class="active"><a href="#login" data-toggle='tab'>Log In</a></li>
-                    <li role="New User"><a href="#signup" data-toggle='tab'>Sign Up</a></li>
+                    <li role="Login" class="active"><a href="#login2" data-toggle='tab'>Log In</a></li>
+                    <li role="New User"><a href="#signup2" data-toggle='tab'>Sign Up</a></li>
 
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="login">
-                        <h3>We use css to change the background color of the content to be equal to the tab</h3>
-                    </div>
-                    <div class="tab-pane" id="signup">
-                        <h3>Something else </h3>
-                    </div>
+
+                    <h3>We use css to change the background color of the content to be equal to the tab</h3>
+                </div>
+                <div class="tab-pane" id="signup2">
+                    <h3>Something else </h3>
                 </div>
             </div>
+        </div>
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
