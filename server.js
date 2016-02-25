@@ -9,6 +9,7 @@ var urlParser = bodyParser.urlencoded({
     extended: true
 })
 var buildReport = require('./buildtimereport.js');
+var createUser = require('./scripts/createuser.js');
 
 app.use(urlParser);
 
@@ -25,7 +26,23 @@ router.use(function (req, res, next) {
 router.get("/", function (req, res) {
     res.sendFile(path + "index.html");
 });
+router.get("/login", function (req, res) {
+    res.sendFile(path + "login.html");
+});
 
+router.post("/login", function (req, res) {
+    var email = req.body.email;
+    var passwarod = req.body.password
+    var callback = function (err) {
+        if (err) {
+            res.end
+        }
+        res.redirect('/');
+    }
+
+
+    createUser.newUser(email, passwarod, callback);
+});
 
 
 router.post("/api/timelogs", function (req, res) {
