@@ -10,6 +10,7 @@ var urlParser = bodyParser.urlencoded({
 })
 var buildReport = require('./buildtimereport.js');
 var createUser = require('./scripts/createuser.js');
+var login = require('./scripts/loguserin.js')
 
 app.use(urlParser);
 
@@ -18,7 +19,7 @@ app.use(express.static('public'));
 app.use(jsonParser);
 
 router.use(function (req, res, next) {
-    console.log("/" + req.method);
+    console.log(req.method + " " + req.path);
     next();
 });
 
@@ -30,18 +31,33 @@ router.get("/login", function (req, res) {
     res.sendFile(path + "login.html");
 });
 
-router.post("/api/createuser", function (req, res) {
-    var email = req.body.email;
+router.post("/login", function (req, res) {
+    var request = req.body;
+    var callback = function (user) {
+        if (typeof user.id == "undefined") {
+            console.log(user.id);
+            res.redirect('/login');
+        }
+        console.log('redirect hit');
+        res.redirect('/');
+
+    }
+    login.login(request, callback);
+
+});
+
+router.post("/createuser", function (req, res) {
+    var request = req.body;
     var passwarod = req.body.password
     var callback = function (err) {
         if (err) {
-            res.end
+            res.end;
         }
-        res.redirect('/');
+        res.redirect('/login');
     }
 
 
-    createUser.newUser(email, passwarod, callback);
+    createUser.newUser(request, callback);
 });
 
 
