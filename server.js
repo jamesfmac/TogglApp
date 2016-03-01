@@ -23,10 +23,10 @@ router.use(function (req, res, next) {
     next();
 });
 
-
 router.get("/", function (req, res) {
     res.sendFile(path + "index.html");
 });
+
 router.get("/login", function (req, res) {
     res.sendFile(path + "login.html");
 });
@@ -37,11 +37,11 @@ router.post("/login", function (req, res) {
         if (typeof user.id == "undefined") {
             console.log(user.id);
             res.redirect('/login');
+        } else {
+            console.log('redirect hit');
+            res.redirect('/');
         }
-        console.log('redirect hit');
-        res.redirect('/');
-
-    }
+    };
     login.login(request, callback);
 
 });
@@ -55,20 +55,14 @@ router.post("/createuser", function (req, res) {
         }
         res.redirect('/login');
     }
-
-
     createUser.newUser(request, callback);
 });
-
 
 router.post("/api/timelogs", function (req, res) {
     var sdate = req.body.startdate;
     var edate = req.body.enddate;
     console.log(sdate + " " + edate)
-
-
     var callback = function (output, filename) {
-
         res.setHeader('Content-disposition', 'attachment; filename=' + filename);
         res.setHeader('Content-type', 'text/csv');
         res.end(output, 'utf-8');
@@ -79,10 +73,11 @@ router.post("/api/timelogs", function (req, res) {
     console.log('post hit' + sdate + buildReport.x);
 });
 
-
-
-
 app.use("/", router);
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function (req, res) {
+    res.redirect('/')
+});
 
 app.listen(port, function () {
     console.log("Live at Port 3000");
