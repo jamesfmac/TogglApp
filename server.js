@@ -8,20 +8,55 @@ var jsonParser = bodyParser.json();
 var urlParser = bodyParser.urlencoded({
     extended: true
 })
+var morgan = require('morgan');
+var knex = require('knex')({
+    client: 'pg',
+    connection: {
+        host: 'localhost',
+        user: '',
+        password: '',
+        database: 'toggleappdb'
+    }
+});
+var Users = bookshelf.Model.extend({
+    tableName: 'users'
+});
+var bookshelf = require('bookshelf')(knex);
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+
 var buildReport = require('./buildtimereport.js');
 var createUser = require('./scripts/createuser.js');
 var login = require('./scripts/loguserin.js')
 
+app.use(morgan('dev'));
 app.use(urlParser);
-
 app.use(express.static('public'));
-
 app.use(jsonParser);
 
-router.use(function (req, res, next) {
-    console.log(req.method + " " + req.path);
-    next();
+
+
+
+
+router.get('/users/:id', function (req, res) {
+    var userID = req.params.id;
+    new Users({
+        'id': userID
+
+    }).fetch().then(function (collection) {
+        res.send(collection.toJSON());
+    })
+
 });
+
+router.get('/users', function (req, res) {
+    Users.collection().fetch().then(function (collection) {
+        res.send(collection.toJSON());
+    })
+
+});
+
+
 
 router.get("/", function (req, res) {
     res.sendFile(path + "index.html");
