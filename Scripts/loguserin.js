@@ -1,4 +1,4 @@
-var login = function (request, callback) {
+var login = function(request, callback) {
     var pg = require('pg');
     var bcrypt = require('bcrypt')
     var conString = 'postgres://localhost:5432/toggleappdb';
@@ -7,11 +7,11 @@ var login = function (request, callback) {
     //this initializes a connection pool
     //it will keep idle connections open for a (configurable) 30 seconds
     //and set a limit of 20 (also configurable)
-    pg.connect(conString, function (err, client, done) {
+    pg.connect(conString, function(err, client, done) {
         if (err) {
             return console.error('error fetching client from pool', err);
         }
-        client.query('Select * from users where email = $1', [request.email], function (err, result) {
+        client.query('Select * from users where email = $1', [request.email], function(err, result) {
             done();
             if (err) {
                 return console.error('insert failed', err);
@@ -27,8 +27,8 @@ var login = function (request, callback) {
     });
 
 
-    var passwordCheck = function (result) {
-        bcrypt.compare(request.password, result.rows[0].password, function (err, res) {
+    var passwordCheck = function(result) {
+        bcrypt.compare(request.password, result.rows[0].password, function(err, res) {
             if (res) {
 
                 console.log('password check for ' + result.rows[0].first_name + ' is ' + res);
@@ -43,7 +43,7 @@ var login = function (request, callback) {
         });
 
     };
-    var response = function (user) {
+    var response = function(user) {
         console.log('response called')
         callback(user);
     };

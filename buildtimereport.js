@@ -80,11 +80,11 @@ function convertToSydTimezone(inputDate) {
 
     var sydDate = '';
 
-    if (moment.parseZone(inputDate)._offset == 0) {
+    if (moment.parseZone(inputDate)._offset === 0) {
 
-        sydDate = moment.tz(inputDate, 'Etc/Greenwich').tz('Australia/Sydney')
+        sydDate = moment.tz(inputDate, 'Etc/Greenwich').tz('Australia/Sydney');
     } else {
-        sydDate = moment.tz(inputDate)
+        sydDate = moment.tz(inputDate);
     }
     console.log(inputDate);
     console.log(sydDate);
@@ -100,9 +100,9 @@ var createCSVFile = function (filepath, filename, callback) {
         var startTimeSyd = convertToSydTimezone(logEntry.start);
         var endTimeSyd = convertToSydTimezone(logEntry.stop);
         var duration = (logEntry.duration / 60).toFixed(0);
-        var startTime = startTimeSyd.format('h.mma')
-        var endTime = endTimeSyd.format('h.mma')
-        var date = startTimeSyd.format('ddd D MMM')
+        var startTime = startTimeSyd.format('h.mma');
+        var endTime = endTimeSyd.format('h.mma');
+        var date = startTimeSyd.format('ddd D MMM');
 
         var outPutRow = startTime + " - " + endTime + " " + logEntry.description;
         outputRecords.push({
@@ -122,7 +122,7 @@ var createCSVFile = function (filepath, filename, callback) {
     });
 
 };
-module.exports.buildFile = buildFile
+module.exports.buildFile = buildFile;
 
 
 /*  tool to format data nicely to the console
