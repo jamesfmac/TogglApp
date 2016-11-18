@@ -20,8 +20,8 @@ var knex = require('knex')({
     }
 });
 var bookshelf = require('bookshelf')(knex);
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
+//var passport = require('passport');
+//var Strategy = require('passport-local').Strategy;
 var Users = bookshelf.Model.extend({
     tableName: 'users'
 });
@@ -73,6 +73,7 @@ router.post("/login", function(req, res) {
             res.redirect('/login');
         } else {
             console.log('redirect hit');
+            console.log(user);
             res.redirect('/');
         }
     };
@@ -82,7 +83,7 @@ router.post("/login", function(req, res) {
 
 router.post("/createuser", function(req, res) {
     var request = req.body;
-    var passwarod = req.body.password;
+    var passwarod = req.body.password; //not sure if this is needed?
     var callback = function(err) {
         if (err) {
             res.end;

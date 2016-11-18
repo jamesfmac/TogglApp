@@ -21,7 +21,8 @@ var newUser = function(request, callback) {
                 if (err) {
                     return console.error('insert failed', err);
                 }
-                console.log('user create for' + user);
+                console.log('user created for' + user);
+                console.log(result);
                 callback();
 
             });
