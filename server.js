@@ -20,11 +20,21 @@ var knex = require('knex')({
     }
 });
 var bookshelf = require('bookshelf')(knex);
-//var passport = require('passport');
-//var Strategy = require('passport-local').Strategy;
-var Users = bookshelf.Model.extend({
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+
+/*var Users = bookshelf.Model.extend({
     tableName: 'users'
 });
+*/
+
+var db = require('./config/database.js');
+var pool = db.getPool();
+var Users = require('./Models/users.js');
+
+//testing pg config
+
+
 
 
 var buildReport = require('./buildtimereport.js');
@@ -35,6 +45,8 @@ app.use(morgan('dev'));
 app.use(urlParser);
 app.use(express.static('public'));
 app.use(jsonParser);
+app.use(passport.initialize());
+
 
 
 
@@ -64,6 +76,20 @@ router.get("/", function(req, res) {
 router.get("/login", function(req, res) {
     res.sendFile(path + "login.html");
 });
+
+//testing out passport.js for authorization stratetgy 
+
+router.get("/passportlogin", function(req, res){
+    res.sendFile(path+"passportlogin.html");  
+});
+
+router.post("/passportlogin", function(req,res){
+    var request = req.body;
+    var user = Users.findOne(request.email);
+    console.log(user);
+});
+
+
 
 router.post("/login", function(req, res) {
     var request = req.body;

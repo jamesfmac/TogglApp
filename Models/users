@@ -1,0 +1,3 @@
+var db = require('./config/database.js');
+var pool = db.getPool();
+
