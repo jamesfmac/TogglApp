@@ -52,7 +52,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
+  Users.findUserById(id, function (err, user) {
     if (err) { return cb(err); }
     cb(null, user);
   });
@@ -69,10 +69,14 @@ app.use(urlParser);
 app.use(express.static('public'));
 app.use(jsonParser);
 
-
+//middleware used for passport js
+app.use(require('cookie-parser')());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
+// Initialize Passport and restore authentication state, if any, from the
+// session.
 app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -96,7 +100,10 @@ router.get('/users', function(req, res) {
 
 
 
-router.get("/", function(req, res) {
+
+
+router.get("/", 
+    function(req, res) {
     res.sendFile(path + "index.html");
 });
 
@@ -119,7 +126,17 @@ router.post("/passportlogin", function(req,res){
 });
 */
 
+router.get('/api/me',
+  passport.authenticate('local'),
+  function(req, res) {
+    res.json(req.user);
+  });
 
+router.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.send('profile', { user: req.user });
+  });
 
 router.post('/passportlogin', 
   passport.authenticate('local', { failureRedirect: '/passportlogin' }),
