@@ -32,8 +32,31 @@ var db = require('./config/database.js');
 var pool = db.getPool();
 var Users = require('./Models/users.js');
 
-//testing pg config
+//testing passport config
 
+passport.use(new Strategy({
+     usernameField: 'email'
+},
+  function(email, password, cb) {
+    console.log('about to call user lookup');
+    Users.findUserByName(email, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { return cb(null, false); }
+      if (Users.checkPassword(user.id, password)) { return cb(null, false); }
+      return cb(null, user);
+    });
+  }));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  db.users.findById(id, function (err, user) {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
 
 
 
@@ -45,6 +68,10 @@ app.use(morgan('dev'));
 app.use(urlParser);
 app.use(express.static('public'));
 app.use(jsonParser);
+
+
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+
 app.use(passport.initialize());
 
 
@@ -79,16 +106,27 @@ router.get("/login", function(req, res) {
 
 //testing out passport.js for authorization stratetgy 
 
+
 router.get("/passportlogin", function(req, res){
     res.sendFile(path+"passportlogin.html");  
 });
 
+/*
 router.post("/passportlogin", function(req,res){
     var request = req.body;
     var user = Users.findOne(request.email);
     console.log(user);
 });
+*/
 
+
+
+router.post('/passportlogin', 
+  passport.authenticate('local', { failureRedirect: '/passportlogin' }),
+  function(req, res) {
+    console.log ('something');
+    res.redirect('/');
+  });
 
 
 router.post("/login", function(req, res) {
