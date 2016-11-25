@@ -132,10 +132,17 @@ router.get('/api/me',
     res.json(req.user);
   });
 
-router.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
+router.get('/api/userprofile',
+ 
   function(req, res){
-    res.send('profile', { user: req.user });
+    console.log ('api/userprofile hit');
+    if (req.user){
+    res.json(req.user);
+}
+else{
+    res.json('no logged in user');
+}
+    
   });
 
 router.post('/passportlogin', 
