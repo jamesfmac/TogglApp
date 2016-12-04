@@ -5,9 +5,18 @@ var bcrypt = require('bcrypt');
 
 //create a blank user object, should probably become a prototype in the future
 var user = {
+	id: null,
 	firstName: '',
-	lastName: '',
-	id: null
+	lastName: ''
+	
+};
+
+user.mock = {
+	id: 16,
+	firstName: 'James',
+	lastName: 'test'
+	
+
 };
 
 //error handling, stolen from some site
@@ -87,5 +96,6 @@ module.exports = {
 	
 	findUserByName: user.findUserByName,
 	checkPassword: user.checkPassword,
-	findUserById: user.findUserById
+	findUserById: user.findUserById,
+	mock: user.mock,
 };

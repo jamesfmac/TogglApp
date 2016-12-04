@@ -1,3 +1,5 @@
+
+/* doesn't look lik this is needed anymore
 var test = function () {
     var formData = {
         "user": "me!"
@@ -22,6 +24,12 @@ var test = function () {
     console.log(formData);
 
 };
+*/
+
+$( document ).ready(function() {
+    getUserProfile();
+});
+
 
 var getUserProfile = function(){
  $.ajax({
@@ -31,8 +39,9 @@ var getUserProfile = function(){
         contentType: '/json',
         cache: false
     }).done(function(data){
-        console.log('user is' + data);
-        $("#nav-user-name").text(data.firstname);
+        console.log('user is' + data.firstname);
+        $("#nav-user-firstname").text(data.firstName);
+        $("#nav-user-fullname").text(data.firstName + ' ' + data.lastName);
         console.log ($("#nav-user-name").val());
     });
 

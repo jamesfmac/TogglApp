@@ -132,14 +132,23 @@ router.get('/api/me',
     res.json(req.user);
   });
 
+
+
 router.get('/api/userprofile',
  
   function(req, res){
     console.log ('api/userprofile hit');
     if (req.user){
+        console.log(req.user);
     res.json(req.user);
+
 }
-else{
+// mocking out user for development. Mock user defined in users model
+else if (process.env.NODE_ENV == 'development'){
+    res.json(Users.mock);
+
+}
+else {
     res.json('no logged in user');
 }
     
@@ -152,6 +161,11 @@ router.post('/passportlogin',
     res.redirect('/');
   });
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
+});
+
 
 router.post("/login", function(req, res) {
     var request = req.body;
@@ -162,6 +176,7 @@ router.post("/login", function(req, res) {
         } else {
             console.log('redirect hit');
             console.log(user);
+            console.log(req.user);
             res.redirect('/');
         }
     };
@@ -205,4 +220,10 @@ app.get('*', function(req, res) {
 app.listen(port, function() {
     console.log("Live at Port 3000");
     console.log(process.env.NODE_ENV);
+    if(process.env.NODE_ENV =='development'){
+        console.log('dev' + Users.mock);
+            }
+            else{
+                console.log ('not dev');
+            }
 });
