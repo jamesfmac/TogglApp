@@ -4,7 +4,7 @@
   "description": "Api for pulling timelogs from toggl",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon server.js",
+    "start": "if [$NODE_ENV == 'production']; then node server.js; else nodemon server.js; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JMc",

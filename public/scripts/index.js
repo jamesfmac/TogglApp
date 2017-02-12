@@ -39,10 +39,10 @@ var getUserProfile = function(){
         contentType: '/json',
         cache: false
     }).done(function(data){
-        console.log('user is' + data.firstname);
+        console.log('user is ' + data.firstName);
         $("#nav-user-firstname").text(data.firstName);
         $("#nav-user-fullname").text(data.firstName + ' ' + data.lastName);
-        console.log ($("#nav-user-name").val());
+        
     });
 
 };
