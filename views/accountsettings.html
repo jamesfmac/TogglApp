@@ -19,7 +19,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span> 
             </button>
-            <a target="_blank" href="#" class="navbar-brand">Toggle Tool</a>
+            <a  href="/index" class="navbar-brand">Toggle Tool</a>
         </div>
         <div class="collapse navbar-collapse">
 
@@ -79,21 +79,25 @@
 
     <div class='container'>
  <div class='page-header text-center'>
-            <h1> Account Settings <small>something something</small></h1>
+            <h1> Account Settings</h1>
         </div>
     
        
-        <form action="/api/timelogs" method='post' class="form-inline">
+        <form action="/api/user" method='post' class="form">
             <div class="form-group">
-                <label for="stardate">Start Date</label>
-                <input id="startdate" name="startdate" class='form-control' type='date' </div>
+                <label for="firstname">First Name</label>
+                <input id="form-user-firstname" name="firstname" class='form-control' type='name' </div>
             </div>
             <div class="form-group">
-                <label for="enddate">End Date</label>
-                <input id="enddate" name="enddate" class="form-control" type="date">
+                <label for="lastname">Last Name</label>
+                <input id="form-user-lastname" name="Last Name" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="form-user-email" name="email" class="form-control" type="email">
             </div>
 
-            <button type="submit" id="btnrequestextract" class="btn btn-primary">Generate</button>
+            <button type="submit" id="btnupdateuserdetails" class="btn btn-primary">Update</button>
 
         </form>
 </div>
@@ -101,7 +105,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../scripts/index.js"></script>
+    <script type="text/javascript" src="../scripts/navmenu.js"></script>
+    <script type="text/javascript" src="../scripts/accountsettings.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 var login = function(request, callback) {
     var pg = require('pg');
-    var bcrypt = require('bcrypt')
+    var bcrypt = require('bcrypt');
     var conString = 'postgres://localhost:5432/toggleappdb';
     var user = {};
 
@@ -15,14 +15,14 @@ var login = function(request, callback) {
             done();
             if (err) {
                 return console.error('insert failed', err);
-                response(user);
+                
             } else if (result.rows.length > 0) {
                 passwordCheck(result);
             } else {
                 response(user);
             }
 
-        })
+        });
 
     });
 

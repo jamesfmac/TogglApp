@@ -129,12 +129,14 @@ app.use(passport.session());
 
 
 //code to restrict all routes except login, taken from stack overflow
+/* commenting out for development
 app.all('*', function(req,res,next) {
   if (req.path === '/' || req.path === '/login')
     next();
   else
     ensureAuthenticated(req,res,next);  
 });
+*/
 
 
 //test routs to try out bookshelf
@@ -157,6 +159,10 @@ router.get('/users', function(req, res) {
 
 router.get("/login", function(req, res) {
     res.sendFile(path + "login.html");
+});
+
+router.get("/accountsettings", function(req, res) {
+    res.sendFile(path + "accountsettings.html");
 });
 
 
