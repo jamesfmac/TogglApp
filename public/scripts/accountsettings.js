@@ -1,8 +1,8 @@
-
-
 $( document ).ready(function() {
     getUserProfile();
 });
+
+var userobject = {};
 
 
 var getUserProfile = function(){
@@ -16,15 +16,13 @@ var getUserProfile = function(){
         console.log('user is ' + data.firstName);
         $("#nav-user-firstname").text(data.firstName);
         $("#nav-user-fullname").text(data.firstName + ' ' + data.lastName);
+        userobject.firstName = data.firstName;
+        userobject.lastName = data.lastName;
+        userobject.email = data.Email;
+        $("#form-user-firstname").value(data.firstName);
+        $("#form-user-lastname").value(data.lastName);
+        $("#form-user-email").value(data.Email);
         
     });
 
 };
-
-
-
-
-
-/*
-document.getElementById("btnrequestextract").addEventListener("click", test); 
-*/
