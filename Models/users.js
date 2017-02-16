@@ -97,6 +97,13 @@ user.checkPassword = function(userid, password, cb) {
 	});
 };
 
+//check that user is authenticated
+
+ user.ensureAuthenticated =function(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+};
+
 
 module.exports = {
 	
@@ -104,4 +111,5 @@ module.exports = {
 	checkPassword: user.checkPassword,
 	findUserById: user.findUserById,
 	mock: user.mock,
+	ensureAuthenticated: user.ensureAuthenticated
 };

@@ -138,34 +138,23 @@ app.all('*', function(req,res,next) {
 });
 */
 
+//Routes initialization for the API routes
 
-//test routs to try out bookshelf
-router.get('/users/:id', function(req, res) {
-    var userID = req.params.id;
-    new Users({
-        'id': userID
+var api = require('./routes/api');
 
-    }).fetch().then(function(collection) {
-        res.send(collection.toJSON());
-    });
-});
+router.use("/api", api);
 
-router.get('/users', function(req, res) {
-    Users.collection().fetch().then(function(collection) {
-        res.send(collection.toJSON());
-    });
 
-});
 
 router.get("/login", function(req, res) {
     res.sendFile(path + "login.html");
 });
 
+
+
 router.get("/accountsettings", function(req, res) {
     res.sendFile(path + "accountsettings.html");
 });
-
-
 
 router.get("/",
     function(req, res) {
@@ -174,59 +163,16 @@ router.get("/",
 
 
 
-//testing out passport.js for authorization stratetgy 
-
-
-
-/*
-router.post("/passportlogin", function(req,res){
-    var request = req.body;
-    var user = Users.findOne(request.email);
-    console.log(user);
-});
-*/
-
-app.get('/api/me', ensureAuthenticated,
-    function(req,res){
-
-    return res.json({ id: req.user.id, username: req.user.email });
-    });
-
-
-
-
-router.get('/api/userprofile',
-
-    function(req, res) {    
-        console.log('api/userprofile is right now being hit');
-        if (req.user) {
-            console.log('user profile returned is' + req.user.toJSON);
-            return res.json(req.user);
-
-        }
-        // mocking out user for development. Mock user defined in users model
-        else if (process.env.NODE_ENV == 'development') {
-            res.json(Users.mock);
-
-        } else {
-            res.json('no logged in user');
-        }
-
-    });
-
 router.post('/login',
     passport.authenticate('local', {
         successRedirect: '/',
         failureRedirect: '/login'
     }));
 
-
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/login');
 });
-
-
 
 router.post("/createuser", function(req, res) {
     var request = req.body;
