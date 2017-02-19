@@ -29,5 +29,5 @@ var newUser = function(request, callback) {
 
         });
     });
-}
-module.exports.newUser = newUser
+};
+module.exports.newUser = newUser;

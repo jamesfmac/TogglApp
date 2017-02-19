@@ -12,7 +12,7 @@ Router.get('/userprofile',
     function(req, res) {    
         console.log('api/userprofile is right now being hit');
         if (req.user) {
-            console.log('user profile returned is' + req.user.toJSON);
+            console.log('user profile returned is ' + (req.user));
             return res.json(req.user);
 
         }

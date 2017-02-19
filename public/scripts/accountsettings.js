@@ -13,15 +13,18 @@ var getUserProfile = function(){
         contentType: '/json',
         cache: false
     }).done(function(data){
-        console.log('user is ' + data.firstName);
+        console.log('user is ' + data);
         $("#nav-user-firstname").text(data.firstName);
         $("#nav-user-fullname").text(data.firstName + ' ' + data.lastName);
         userobject.firstName = data.firstName;
         userobject.lastName = data.lastName;
         userobject.email = data.Email;
-        $("#form-user-firstname").value(data.firstName);
-        $("#form-user-lastname").value(data.lastName);
-        $("#form-user-email").value(data.Email);
+        $("#form-user-firstname").val(data.firstName);
+        $("#form-user-lastname").val(data.lastName);
+        $("#form-user-email").val(data.email);
+
+        //setting this to understand the user profile data being returned
+        userobject = data;
         
     });
 

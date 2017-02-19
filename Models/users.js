@@ -37,6 +37,7 @@ user.findUserByName = function(username, callback) {
 				user.firstName = result.rows[0].first_name;
 				user.lastName = result.rows[0].last_name;
 				user.id = result.rows[0].id;
+				user.email = result.rows[0].email;
 				callback(null, user);
 			} else {
 				callback(null, null);
@@ -58,6 +59,7 @@ user.findUserById = function(userid, callback) {
 				user.firstName = result.rows[0].first_name;
 				user.lastName = result.rows[0].last_name;
 				user.id = result.rows[0].id;
+				user.email = result.rows[0].email;
 				callback(null, user);
 			} else {
 				callback(null, null);
