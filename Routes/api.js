@@ -1,15 +1,20 @@
 var Router = require('express').Router();
 var ensureAuthenticated = require('../Models/users.js');
 var path = require('path');
+var usersController = require('../controllers/users.js');
+
 
 
 Router.get('/testapi', function(req, res) {
-  res.status(200).json({ message: 'Connected!' });
+    res.status(200).json({
+        message: 'Connected!'
+    });
 });
 
+//this will probably be removed and replaced with the route, controller, model options below
 Router.get('/userprofile',
 
-    function(req, res) {    
+    function(req, res) {
         console.log('api/userprofile is right now being hit');
         if (req.user) {
             console.log('user profile returned is ' + (req.user));
@@ -25,6 +30,15 @@ Router.get('/userprofile',
         }
 
     });
+
+
+//returns the full userprofile for a passed in user ID
+Router.get('/users:id', usersController.getUserDetail);
+
+//return the full details for the current user based on req.user.id from the logged in users session
+Router.get('/currentuser', usersController.getCurrentUser);
+
+
 
 
 module.exports = Router;
