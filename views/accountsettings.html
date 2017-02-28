@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" type="text/css" href="../css/accountsettings.css">
+    <link rel="stylesheet" type="text/css" href="../css/alerts.css">
 </head>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,19 +79,23 @@
 <body>
 
     <div class='container'>
+    <div class="alert alert-success alert-fixed fade" id = "success-alert" role="alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Success! </strong> Your settings have been updated </div>
+
  <div class='page-header text-center'>
             <h1> Account Settings</h1>
         </div>
-    
+     <a  href="#" id="myWish" class="btn btn-mini"> Purchase </a>
        
-        <form action="/api/users" method='put' class="form">
+        <form action="/api/currentuser" method='post' id="form-update-user-details" class="form">
             <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input id="form-user-firstname" name="firstname" class='form-control' type='name' </div>
             </div>
             <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input id="form-user-lastname" name="Last Name" class="form-control" type="text">
+                <input id="form-user-lastname" name="lastname" class="form-control" type="text">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

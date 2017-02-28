@@ -11,17 +11,17 @@ var pool = db.getPool();
         if (err) {
             return console.error('insert failed', err);
         }   
-        console.log(result);
+        return console.log(result);
        
     });
 
  
 // create API key table
-      pool.query('CREATE TABLE users_api_keys(\
-        user_id integer not null ,api_key VARCHAR(60) not null, PRIMARY KEY (user_id, api_key),CONSTRAINT user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE)', 
+      pool.query('DROP TABLE IF EXISTS users_api_keys CASCADE; CREATE TABLE users_api_keys(\
+        user_id integer UNIQUE not null ,api_key VARCHAR(60) not null, PRIMARY KEY (user_id, api_key),CONSTRAINT user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE CASCADE)', 
         function(err, result) {   
         if (err) {
             return console.error('insert failed', err);
         }   
-        console.log(result);
+        return console.log(result);
     });

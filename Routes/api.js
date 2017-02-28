@@ -37,6 +37,8 @@ Router.get('/users:id', usersController.getUserDetail);
 
 //return the full details for the current user based on req.user.id from the logged in users session
 Router.get('/currentuser', usersController.getCurrentUser);
+Router.post('/currentuser', usersController.updateCurrentUser);
+
 
 
 

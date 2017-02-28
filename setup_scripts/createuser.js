@@ -26,7 +26,7 @@ bcrypt.hash(testUser.password, 8, function(err, hash) {
             return console.error('insert failed', err);
         }
         console.log('user created for' + user);
-        console.log(result);
+        return console.log(result);
        
 
     });

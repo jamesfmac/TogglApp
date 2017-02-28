@@ -76,7 +76,7 @@ var buildFile = function (sDate, eDate, callback) {
 
 //function checks what timezone offset to apply (sydney only) and then converts whatever datestamp has been sent
 function convertToSydTimezone(inputDate) {
-    console.log(inputDate);
+   
 
     var sydDate = '';
 
@@ -86,13 +86,16 @@ function convertToSydTimezone(inputDate) {
     } else {
         sydDate = moment.tz(inputDate);
     }
-    console.log(inputDate);
-    console.log(sydDate);
+ 
     return sydDate;
 }
 
 var createCSVFile = function (filepath, filename, callback) {
     var i = 0;
+     console.log(util.inspect(parsedResponse, {
+            depth: 2,
+            colors: true
+        }));
 
     for (i; i < parsedResponse.length; i++) {
 
@@ -125,11 +128,5 @@ var createCSVFile = function (filepath, filename, callback) {
 module.exports.buildFile = buildFile;
 
 
-/*  tool to format data nicely to the console
- 
- console.log(util.inspect(parsedResponse, {
-            depth: 2,
-            colors: true
-        }));
-        
-*/
+
+

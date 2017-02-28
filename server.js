@@ -20,43 +20,17 @@ var knex = require('knex')({
     }
 });
 var bookshelf = require('bookshelf')(knex);
+
+//required for user authentication, should be moved into config/passportjs
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var bcrypt = require('bcrypt');
 
-/*var Users = bookshelf.Model.extend({
-    tableName: 'users'
-});
-*/
 
 var db = require('./config/database.js');
 var pool = db.getPool();
 var Users = require('./Models/users.js');
 
-/*testing passport config
-
-passport.use(new Strategy({
-        usernameField: 'email'
-    },
-    function(email, password, cb) {
-        console.log('about to call user lookup');
-        Users.findUserByName(email, function(err, user) {
-            if (err) {
-                return cb(err);
-            }
-            if (!user) {
-                return cb(null, false);
-            }
-            if (Users.checkPassword(user.id, password )=== false) {
-                console.log('password returnd false');
-                return cb(null, false);
-            }
-            console.log('password returnd true');
-            return cb(null, user);
-        });
-    }
-));
-*/
 
 
 //testing passport config to fix async password checking
@@ -145,12 +119,10 @@ var api = require('./routes/api');
 router.use("/api", api);
 
 
-
+//The view routes will eventually be pulled into a view route folder
 router.get("/login", function(req, res) {
     res.sendFile(path + "login.html");
 });
-
-
 
 router.get("/accountsettings", function(req, res) {
     res.sendFile(path + "accountsettings.html");
@@ -159,6 +131,11 @@ router.get("/accountsettings", function(req, res) {
 router.get("/",
     function(req, res) {
         res.sendFile(path + "index.html");
+    });
+
+router.get("/admin",
+    function(req, res) {
+        res.sendFile(path + "admin.html");
     });
 
 
