@@ -66,12 +66,12 @@ module.exports = {
 				if (err) {
 					callback(new Error('database error ' + err));
 				} else if (result.rows.length > 1) {
-					console.log ('elseif loop entered');
+					
 					var users = [];
 					var foundUsers = result.rows.length;
 					var addedUsers = 0; //used to keep track of when to fire the callback
 					for (var i = 0; i < foundUsers; i++) {
-						console.log('for loop entered i =' + i);
+						
 						users.push({
 							firstName: result.rows[i].first_name,
 							lastName: result.rows[i].last_name,
@@ -81,9 +81,9 @@ module.exports = {
 						});
 
 						addedUsers++;
-						console.log('addedUsers = '+addedUsers +' foundUsers = ' +foundUsers);
+						
 						if (addedUsers == foundUsers) {
-							console.log('callback from model about to be called with ' + users);
+							
 							callback(null, users);
 						}
 
@@ -91,7 +91,7 @@ module.exports = {
 
 
 				} else {
-					console.log("no users found");
+					
 					callback(null, null);
 				}
 			}
@@ -162,7 +162,7 @@ module.exports = {
 
 
 	//take a user ID and password and compare against the db
-	ucheckPassword: function(userid, password, cb) {
+	checkPassword: function(userid, password, cb) {
 		console.log('pssword check called');
 		pool.query('select password from users where id = $1', [userid], function(err, result) {
 			if (err) {

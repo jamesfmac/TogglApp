@@ -52,8 +52,8 @@ var watchForDirtyForm = function() {
 // slide in and out success message
 var slideAlert = function() {
     $("#success-alert").addClass("in");
-    $("#alertSuccess").fadeTo(2000, 800).slideUp(500, function() {
-        $("#alertSuccess").removeClass('in');
+    $("#success-alert").fadeTo(2000, 1200).slideUp(500, function() {
+        $("#success-alert").removeClass('in');
     });
 
 };
@@ -79,7 +79,7 @@ $("#btnupdateuserdetails").click(function() {
         url: url,
         data: $("#form-update-user-details").serialize(), // serializes the form's elements.
         success: function(data) {
-            flashSuccess(); // show users success message
+            slideAlert(); // show users success message
             scrolltotop();
             watchForDirtyForm(); //resets the form to watch for new changes
         }
