@@ -1,5 +1,3 @@
-
-
 $( document ).ready(function() {
     getUserProfile();
 });
@@ -20,11 +18,3 @@ var getUserProfile = function(){
     });
 
 };
-
-
-
-
-
-/*
-document.getElementById("btnrequestextract").addEventListener("click", test); 
-*/

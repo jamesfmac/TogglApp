@@ -79,29 +79,39 @@
 
     <div class='container'>
  <div class='page-header text-center'>
-            <h1> Download logs <small>something something</small></h1>
+            <h1> Manage Users <small></small></h1>
         </div>
     
-       
-        <form action="/api/timelogs" method='post' class="form-inline">
-            <div class="form-group">
-                <label for="stardate">Start Date</label>
-                <input id="startdate" name="startdate" class='form-control' type='date' </div>
-            </div>
-            <div class="form-group">
-                <label for="enddate">End Date</label>
-                <input id="enddate" name="enddate" class="form-control" type="date">
-            </div>
+       <table class="table table-striped table-hover table-bordered" id="table-user-admin">
+           <thead>
+               <th> First Name </th>
+               <th> Last Name </th>
+               <th> Email </th>
+               <th> API Key </th>
+               <th> Action </th>
+           </thead>
+           <tbody>
+                <tr>
+                    <td> Row </td>
+                    <td> One </td>
+                    <td> @ </td>
+                    <td> rou6923ng </td>
+                    <td></td>
+                </tr>
+               
+           </tbody>
 
-            <button type="submit" id="btnrequestextract" class="btn btn-primary">Generate</button>
+       </table>
 
-        </form>
+       <button class="btn btn-primary" id="btn-load-users"> Load Users</button>
+        
 </div>
     </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../scripts/navmenu.js"></script>
+    <script type="text/javascript" src="../scripts/admin.js"></script>
 </body>
 
 </html>

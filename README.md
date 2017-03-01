@@ -3,10 +3,16 @@
 ### Project Goals 
 
 1. Integrate with Toggl API [done]
-2. UI for selecting date range
-3. Trigger .csv download for the client side
-4. Intigrate google log in 
+2. UI for selecting date range[done]
+3. Trigger .csv download for the client side[done]
+4. Create basic auth [done]
 5. API key configurable per user
+6. Store time logs
+7. Allow time logs to be tagged with projects
+8. Log time to Jira tickets with phantom js
+
+
 
 ### Working Notes
-- Investigating options for implmenting the UI, express will probably be the way forward
+- Need to restrict views for non-authenticated users 
+- Best structure for node apps??

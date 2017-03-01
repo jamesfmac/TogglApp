@@ -4,16 +4,27 @@
   "description": "Api for pulling timelogs from toggl",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "if [$NODE_ENV == 'production']; then node server.js; else nodemon server.js; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "JMc",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
+    "bookshelf": "^0.9.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
     "csv": "^0.4.6",
     "express": "^4.13.4",
+    "express-session": "^1.14.2",
+    "knex": "^0.10.0",
     "moment-timezone": "^0.5.0",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pg": "^6.0.0",
+    "pg-pool": "^1.5.0",
     "request": "^2.69.0"
   },
   "devDependencies": {
