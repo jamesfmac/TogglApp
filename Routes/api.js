@@ -32,6 +32,9 @@ Router.get('/userprofile',
     });
 
 
+//returns the full userprofile for all users
+Router.get('/users', usersController.getAllUsers);
+
 //returns the full userprofile for a passed in user ID
 Router.get('/users:id', usersController.getUserDetail);
 
