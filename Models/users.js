@@ -75,7 +75,7 @@ module.exports = {
 						users.push({
 							firstName: result.rows[i].first_name,
 							lastName: result.rows[i].last_name,
-							uid: result.rows[i].id,
+							id: result.rows[i].id,
 							email: result.rows[i].email,
 							apikey: result.rows[i].api_key
 						});
