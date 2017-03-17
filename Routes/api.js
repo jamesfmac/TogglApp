@@ -38,6 +38,10 @@ Router.get('/users', usersController.getAllUsers);
 //returns the full userprofile for a passed in user ID
 Router.get('/users:id', usersController.getUserDetail);
 
+//returns the full userprofile for a passed in user ID
+Router.put('/users:id', usersController.getUserDetail);
+
+
 //return the full details for the current user based on req.user.id from the logged in users session
 Router.get('/currentuser', usersController.getCurrentUser);
 Router.post('/currentuser', usersController.updateCurrentUser);

@@ -1,12 +1,14 @@
 $( document ).ready(function() {
-    getUserProfile();
+    console.log('navmenu.js loaded');
+    populateUserInUi();
+ 
 });
 
 
-var getUserProfile = function(){
+var populateUserInUi = function(){
  $.ajax({
         type: "get",
-        url: "/api/userprofile",
+        url: "/api/currentuser",
         processData: false,
         contentType: '/json',
         cache: false
@@ -18,3 +20,5 @@ var getUserProfile = function(){
     });
 
 };
+
+
