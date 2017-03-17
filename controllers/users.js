@@ -71,6 +71,23 @@ module.exports = {
 				return res.json(user);
 			}
 		});
+	},
+
+	//updates the user profile information based on the logged in user in req.user.id
+	updateUserDetails: function(req, res) {
+		console.log('updateUserDetails called with userID ');
+		console.log(req.body);
+		console.log(req);
+		//will need to add some error handling for people hitting this endpoint that aren't logged in
+		users.updateUserDetails(req.params.id, req.body, function(err, user) {
+			console.log(user);
+			if (err) {
+				return (err);
+			} else {
+				console.log('response callback called with ' + user);
+				return res.json(user);
+			}
+		});
 	}
 
 

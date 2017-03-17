@@ -62,7 +62,7 @@ module.exports = {
 	getAllUsers: function(callback) {
 
 		console.log('get all users called');
-		pool.query('Select * from users u join users_api_keys apk on u.id = apk.user_id', function(err, result) {
+		pool.query('Select * from users u left join users_api_keys apk on u.id = apk.user_id', function(err, result) {
 				if (err) {
 					callback(new Error('database error ' + err));
 				} else if (result.rows.length > 1) {
