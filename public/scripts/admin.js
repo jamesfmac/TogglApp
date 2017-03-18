@@ -61,7 +61,6 @@ var editRowAction = function() {
 		clickedButton.attr('data-editmode', 0);
 		revertRowToNormal(rownumber);
 
-
 	} else {
 		console.log('ready to edit!' + currentstate + 'rownumber ' + rownumber);
 
@@ -87,7 +86,7 @@ var delteRowAction = function() {
 
 };
 
-//test function for switching on inline forms 
+//Sets which fields to make editable 
 
 var makeRowEditable = function(rowid) {
 	tds = [
@@ -99,6 +98,7 @@ var makeRowEditable = function(rowid) {
 	replaceTdDataWithInputField(tds);
 };
 
+
 //return rows to normal state
 var revertRowToNormal = function(rowid) {
 	inputs = [
@@ -109,7 +109,6 @@ var revertRowToNormal = function(rowid) {
 	];
 	replaceInputFieldsWithTds(inputs);
 };
-
 
 
 //replaces an array of tds with input fields
