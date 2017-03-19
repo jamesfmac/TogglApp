@@ -126,7 +126,7 @@ module.exports = {
 
 	//updates the passed in user id with content from data
 	updateUserDetails: function(userid, data, callback) {
-		console.log('updateUserDetails called with id ' + userid + ' and data ' + data.firstname + data.apikey);
+		console.log('Model updateUserDetails called with id ' + userid + ' and data ' + data.firstname + ' ' + data.apikey);
 
 		//setups the transactions to make sure that either both pass or fail and we don't get partial updates 
 		pool.query('Begin', function(err) {
@@ -136,6 +136,8 @@ module.exports = {
 
 				var user = [userid, data.email, data.firstname, data.lastname];
 				var userapi = [userid, data.apikey];
+				console.log('user being passed is');
+				console.log(user);
 
 				pool.query('Update users set email = ($2), first_name = ($3), last_name = ($4) where id = ($1)', user, function(err, result) {
 					//rollbacks might fail, not sure why 'done' needs to be passed through

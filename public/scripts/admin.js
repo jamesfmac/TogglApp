@@ -43,6 +43,7 @@ var addListnersToActionButtons = function(rowsintable) {
 //function for the edit row button 
 var editRowAction = function() {
 	var clickedButton = $(this);
+	clickedButton.blur(); //remove active state highlight for the button 
 	var currentstate = clickedButton.attr('data-editmode');
 	var rownumber = clickedButton.attr('data-rownumber');
 	var clickedButtonSpan = $('span:first', this);
@@ -159,7 +160,7 @@ var saveChangeToUser = function(rowid) {
 	};
 	console.log(data);
 
-	var url = "/api/users" + rowid; // the script where you save user data
+	var url = "/api/users" + $('#user-id' + rowid).text(); // the script where you save user data
 	console.log(url);
 	$.ajax({
 		type: "PUT",

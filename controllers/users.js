@@ -75,9 +75,9 @@ module.exports = {
 
 	//updates the user profile information based on the logged in user in req.user.id
 	updateUserDetails: function(req, res) {
-		console.log('updateUserDetails called with userID ');
+		console.log('Controller updateUserDetails called with userID ' + req.params.id);
 		console.log(req.body);
-		console.log(req);
+		
 		//will need to add some error handling for people hitting this endpoint that aren't logged in
 		users.updateUserDetails(req.params.id, req.body, function(err, user) {
 			console.log(user);
