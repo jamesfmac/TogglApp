@@ -29,7 +29,12 @@ var convertToGmtISO = function (dateTime, dayRounding) {
 
 //capture missing dates and replace with sdate = 1/1/16 and edate = today
 var buildFile = function (sDate, eDate, callback) {
-    var filePath = './output/';
+
+    console.log('array length is'+ parsedResponse.length);
+    if (parsedResponse.length>0){
+        parsedResponse.length=0;
+    }
+    
     var filename = 'timelog' + sDate + '.csv';
     if (eDate) {
         eDateIso = convertToGmtISO(eDate, 'up');
@@ -65,7 +70,7 @@ var buildFile = function (sDate, eDate, callback) {
             parsedResponse = JSON.parse(body);
 
 
-            createCSVFile(filePath, filename, callback);
+            createCSVFile( filename, callback);
 
 
         }
@@ -90,12 +95,20 @@ function convertToSydTimezone(inputDate) {
     return sydDate;
 }
 
-var createCSVFile = function (filepath, filename, callback) {
+var createCSVFile = function ( filename, callback) {
     var i = 0;
+
+    console.log('output length is'+ outputRecords.length);
+        if (outputRecords.length>0){
+            outputRecords.length=0;
+        }
+
+    /*
      console.log(util.inspect(parsedResponse, {
             depth: 2,
             colors: true
         }));
+     */
 
     for (i; i < parsedResponse.length; i++) {
 
@@ -106,8 +119,8 @@ var createCSVFile = function (filepath, filename, callback) {
         var startTime = startTimeSyd.format('h.mma');
         var endTime = endTimeSyd.format('h.mma');
         var date = startTimeSyd.format('ddd D MMM');
-
         var outPutRow = startTime + " - " + endTime + " " + logEntry.description;
+
         outputRecords.push({
             Datee: date,
             Duration: duration,
